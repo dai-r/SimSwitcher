@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ベースカラー -->
+    <color name="background">#F0F2F5</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="hint_background">#EEF2FF</color>
+
+    <!-- テキスト -->
+    <color name="text_primary">#1A1A2E</color>
+    <color name="text_secondary">#6B7280</color>
+
+    <!-- アクセント (インディゴ) -->
+    <color name="accent">#4F46E5</color>
+    <color name="accent_dark">#3730A3</color>
+
+    <!-- バッジ: 通話 (青緑) -->
+    <color name="badge_call_bg">#D1FAE5</color>
+    <color name="badge_call_text">#065F46</color>
+
+    <!-- バッジ: データ (青) -->
+    <color name="badge_data_bg">#DBEAFE</color>
+    <color name="badge_data_text">#1E40AF</color>
+
+    <!-- バッジ: SMS (オレンジ) -->
+    <color name="badge_sms_bg">#FEF3C7</color>
+    <color name="badge_sms_text">#92400E</color>
+
+    <!-- Material テーマ用 -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

@@ -1,0 +1,75 @@
+SimSwitcher 開発メモ
+=====================
+
+■ アプリ概要
+  デュアルSIM端末向けのSIM情報表示 + 設定ショートカットアプリ
+  パッケージ名: com.example.simswitcher
+  minSdk: 24 / targetSdk: 35 / compileSdk: 35
+
+■ 機能
+  - SIMカード情報の表示（キャリア名、スロット番号、電話番号）
+  - デフォルトSIMバッジ表示（通話/データ/SMS）
+  - 各SIMの詳細設定画面への直接ジャンプ（変更ボタン）
+  - SIM設定画面・ネットワーク設定画面へのショートカットボタン
+  - Quick Settingsタイル（通知バーからワンタップでSIM設定へ）
+
+■ ボタン遷移先まとめ（Pixel 9a / Android 16 で確認済み）
+  SIMカード横「変更」  → NETWORK_OPERATOR_SETTINGS + SUB_ID → 個別SIMの詳細画面
+  「SIM設定を開く」    → MANAGE_ALL_SIM_PROFILES_SETTINGS   → SIM一覧画面（プライマリSIM設定含む）
+  「ネットワーク設定」 → ACTION_WIRELESS_SETTINGS            → ネットワークとインターネット画面
+
+■ Intent調査結果（Pixel 9a / Android 16）
+  SIM_SETTINGS                        → 存在しない
+  MOBILE_DATA_PREFERRED_SIM_SETTINGS  → 存在しない
+  NETWORK_OPERATOR_SETTINGS           → 「ネットワークとインターネット」画面（SIM一覧の1階層上）
+  NETWORK_OPERATOR_SETTINGS + SUB_ID  → 個別SIMの詳細画面（直接飛べる！）
+  DATA_ROAMING_SETTINGS               → 個別SIMの詳細画面（DOCOMOのデータローミング設定）
+  MANAGE_ALL_SIM_PROFILES_SETTINGS    → SIM一覧画面（プライマリSIM・モバイルデータ設定あり）★目的の画面
+  ACTION_WIRELESS_SETTINGS            → 「ネットワークとインターネット」画面
+
+■ テスト済みデバイス
+  - Pixel 9a (Android 16) - 実機 (4C011JEBF03678)
+    SIM: NTT DOCOMO (020-2056-3611) + povo (070-8347-1814)
+  - XQ-CQ44 Xperia (Android 14) - 実機 (QV7706A6ER)
+  - Pixel_API34 (Android 14) - エミュレータ
+
+■ ソースファイル構成
+  app/src/main/java/com/example/simswitcher/
+    MainActivity.kt    - メイン画面（SIM情報表示、ボタン制御、権限リクエスト）
+    SimHelper.kt       - SIM情報取得、設定画面Intent構築・起動
+    SimTileService.kt  - Quick Settingsタイル
+
+  app/src/main/res/
+    layout/activity_main.xml    - メイン画面レイアウト
+    layout/item_sim_card.xml    - SIMカード表示カード（変更ボタン付き）
+    values/strings.xml, colors.xml, themes.xml
+    drawable/ - アイコン、バッジ背景
+
+■ ビルド・インストール
+  cd SimSwitcher
+  ./gradlew assembleDebug        # ビルドのみ
+  ./gradlew installDebug         # 接続中の全デバイスにインストール
+  adb -s <device_id> install app/build/outputs/apk/debug/app-debug.apk  # 特定デバイスのみ
+
+■ エミュレータセットアップ手順
+  sdkmanager "emulator"
+  sdkmanager "system-images;android-34;google_apis;x86_64"
+  avdmanager create avd -n Pixel_API34 -k "system-images;android-34;google_apis;x86_64" -d pixel_6
+  emulator -avd Pixel_API34
+
+■ スクリーンショット取得
+  adb -s <device_id> shell screencap /sdcard/screenshot.png
+  adb -s <device_id> pull /sdcard/screenshot.png ./screenshot.png
+
+■ 競合アプリ（Google Play）
+  - SIM切替スイッチ: ウィジェットでデータSIMをワンタップ切替
+  - Dual Sim / Multi Sim Selector: SIMの自動選択ルール設定
+  - Dual Sim Manager: 通話のSIM自動振り分け
+  → 本アプリはSIM情報表示 + 設定直接ショートカット + QSタイルのシンプル構成で差別化可能
+
+■ ストア公開検討中
+  必要なもの:
+  - アプリアイコン（正式版）
+  - リリースビルド署名（keystore）
+  - Google Play Console登録（開発者アカウント $25）
+  - プライバシーポリシー（READ_PHONE_STATE使用のため必須）

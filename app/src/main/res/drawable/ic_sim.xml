@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SIMカードアイコン (アプリランチャー・マニフェスト用) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M19.99,4C19.99,2.9 19.1,2 18,2L10,2L4,8L4,20C4,21.1 4.9,22 6,22L18.01,22C19.11,22 20,21.1 20,20L19.99,4ZM9,19L7,19L7,17L9,17L9,19ZM9,15L7,15L7,11L9,11L9,15ZM13,19L11,19L11,17L13,17L13,19ZM13,15L11,15L11,11L13,11L13,15ZM17,19L15,19L15,17L17,17L17,19ZM17,15L15,15L15,11L17,11L17,15Z" />
+</vector>
