@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SIM切替</string>
+    <string name="subtitle">SIMカードの情報と設定ショートカット</string>
+
+    <string name="tile_label">SIM切替</string>
+
+    <string name="section_sim_info">SIM情報</string>
+    <string name="section_quick_actions">クイックアクション</string>
+
+    <string name="no_sim_message">SIMカードが見つかりません。\nデュアルSIM端末でSIMが挿入されているか確認してください。</string>
+    <string name="permission_denied_message">SIM情報を表示するには「電話」の権限を許可してください。\n設定 → アプリ → SIM切替 → 権限</string>
+
+    <string name="btn_sim_settings">SIM設定を開く</string>
+    <string name="btn_call_settings">通話用SIMを変更</string>
+    <string name="btn_network_settings">ネットワーク設定</string>
+    <string name="btn_change_sim">変更</string>
+
+    <string name="badge_call">通話</string>
+    <string name="badge_data">データ</string>
+    <string name="badge_sms">SMS</string>
+
+    <string name="hint_title">Quick Settingsタイルについて</string>
+    <string name="hint_body">通知バーを2回下スワイプ → 右下の鉛筆アイコン(編集) →「SIM切替」をドラッグして追加すると、ステータスバーからワンタップでSIM設定に移動できます。</string>
+</resources>
