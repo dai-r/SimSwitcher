@@ -1,6 +1,12 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+}
+
+val localProps = Properties().apply {
+    rootProject.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) }
 }
 
 android {
@@ -17,10 +23,10 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("../release-keystore.jks")
-            storePassword = "REMOVED_PASSWORD"
-            keyAlias = "simswitcher"
-            keyPassword = "REMOVED_PASSWORD"
+            storeFile = rootProject.file(localProps.getProperty("RELEASE_STORE_FILE", ""))
+            storePassword = localProps.getProperty("RELEASE_STORE_PASSWORD", "")
+            keyAlias = localProps.getProperty("RELEASE_KEY_ALIAS", "")
+            keyPassword = localProps.getProperty("RELEASE_KEY_PASSWORD", "")
         }
     }
 
